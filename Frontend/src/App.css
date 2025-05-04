@@ -1,0 +1,246 @@
+/* App.css */
+:root {
+  --bg-gradient: linear-gradient(135deg, #2c0735 0%, #0b0b2a 100%);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --neon-purple: #bc7af9;
+  --neon-blue: #6d8cff;
+  --terminal-bg: #0a0819;
+  --code-bg: #1a1a2e;
+  --text-primary: #e0e0e0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  font-family: 'Fira Code', monospace;
+}
+
+main {
+  height: 100vh;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  overflow: hidden;
+}
+
+/* Editor Container */
+.editor-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-bg);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.window-controls {
+  padding: 1rem;
+  display: flex;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.control.red {
+  background: #ff5f56
+}
+
+.control.yellow {
+  background: #ffbd2e
+}
+
+.control.green {
+  background: #27c93f
+}
+
+.code-window {
+  flex: 1;
+  padding: 1rem 2rem;
+  overflow: auto;
+}
+
+.react-simple-code-editor {
+  height: 100% !important;
+}
+
+/* Remove Focus Border */
+.react-simple-code-editor textarea {
+  border: none !important;
+  outline: none !important;
+}
+
+.react-simple-code-editor textarea:focus {
+  box-shadow: none !important;
+}
+
+/* Syntax Highlighting */
+.token.keyword {
+  color: var(--neon-purple);
+}
+
+.token.function {
+  color: var(--neon-blue);
+}
+
+.token.string {
+  color: #6dff8b;
+}
+
+.token.operator {
+  color: #ff8a4c;
+}
+
+.token.comment {
+  color: #8a8a8a;
+}
+
+/* Submit Button */
+.submit-button {
+  position: sticky;
+  bottom: 1.5rem;
+  margin: 1rem 2rem -4rem auto;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(188, 122, 249, 0.3);
+  z-index: 2;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(188, 122, 249, 0.4);
+}
+
+.rocket-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.submit-button:hover .rocket-icon {
+  transform: rotate(45deg) scale(1.2);
+}
+
+/* Output Window */
+.output-window {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--terminal-bg);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.terminal-header {
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.terminal-body {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  line-height: 1.8;
+}
+
+/* Markdown Styling */
+.markdown-body pre {
+  background: var(--code-bg) !important;
+  padding: 1.5rem !important;
+  border-radius: 8px !important;
+  margin: 1.5rem 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.markdown-body code {
+  font-family: 'Fira Code', monospace !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: 4px !important;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-purple);
+  border-radius: 4px;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .editor-container,
+  .output-window {
+    height: 50vh;
+    min-height: 400px;
+  }
+
+  .submit-button {
+    margin: 1rem 1rem -4rem auto;
+    padding: 0.7rem 1.5rem;
+  }
+}
